@@ -3,9 +3,10 @@
 #include <fstream>
 #include <string>
 #include <list>
-float pi = std::acosf(-1);
-float VOLUME = 0.5;
-float sample_rate = 48000;
+
+float VOLUME = 1;
+float sample_rate = 96000;
+const float pi = std::acosf(-1);
 
 float freq(const float& hz);
 
@@ -15,7 +16,7 @@ std::list<float> generator(const std::string& filename) {
     float hz, duration;
     while (notes >> hz >> duration) {
         float frequency = freq(hz);
-        for (int i = 0; i <= (int)(duration*sample_rate)-1; i++) {
+        for (int i = 0; i < (int)(duration*sample_rate); i++) {
             array.push_back(std::sinf(((float) i) * frequency) * VOLUME);
         }
     }
